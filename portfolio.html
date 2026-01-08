@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Chandra Dasi - Portfolio</title>
+    <!-- Chosen Palette: Modern Slate -->
+    <!-- Application Structure Plan: A single-page application with a fixed navigation bar for seamless scrolling between sections (About, Skills, Experience, Projects, Education, Certifications, Contact). This structure provides a familiar and intuitive user flow, allowing visitors to quickly access specific information or explore the portfolio linearly. Key interactions include hover effects for visual feedback and clickable modal windows for project details, which keeps the main layout clean while offering depth on demand. This design prioritizes scannability and focused exploration over a static, linear document. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Technical Skills List -> Goal: Organize/Inform -> Viz/Presentation: Grid of styled cards for skill categories (Languages, Frameworks, etc.) -> Interaction: Subtle hover animations -> Justification: More visually engaging than a plain list and clearly separates different types of skills without implying proficiency levels. -> Library/Method: HTML/Tailwind CSS.
+        - Report Info: Project Descriptions -> Goal: Organize/Inform with detail on-demand -> Viz/Presentation: Cards for each project with a 'View Details' button. -> Interaction: Clicking the button opens a modal window with detailed project bullet points. -> Justification: Keeps the primary view uncluttered and allows users to selectively deep-dive into projects that interest them, enhancing user-directed exploration. -> Library/Method: HTML/Tailwind for styling, Vanilla JS for modal open/close logic.
+        - Report Info: Professional Experience -> Goal: Inform/Show History -> Viz/Presentation: A clean, chronological timeline format. -> Interaction: None, focus on readability. -> Justification: A timeline is an intuitive way to present work history. Simplicity here ensures the focus remains on the accomplishments. -> Library/Method: HTML/Tailwind CSS.
+        - Report Info: Certifications List -> Goal: Organize/Inform -> Viz/Presentation: Grid of styled cards for each certification -> Interaction: None -> Justification: A clean, card-based layout to visually separate each certification and maintain design consistency with other sections. -> Library/Method: HTML/Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; 
+            color: #1E293B;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #3B82F6; 
+            border-bottom-color: #3B82F6;
+        }
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-slate-800">Akash Chandra Dasi</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link font-medium text-slate-600">About</a>
+                <a href="#skills" class="nav-link font-medium text-slate-600">Skills</a>
+                <a href="#experience" class="nav-link font-medium text-slate-600">Experience</a>
+                <a href="#projects" class="nav-link font-medium text-slate-600">Projects</a>
+                <a href="#education" class="nav-link font-medium text-slate-600">Education</a>
+                <a href="#certifications" class="nav-link font-medium text-slate-600">Certifications</a>
+                <a href="#contact" class="nav-link font-medium text-slate-600">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-slate-600">About</a>
+            <a href="#skills" class="block py-2 text-slate-600">Skills</a>
+            <a href="#experience" class="block py-2 text-slate-600">Experience</a>
+            <a href="#projects" class="block py-2 text-slate-600">Projects</a>
+            <a href="#education" class="block py-2 text-slate-600">Education</a>
+            <a href="#certifications" class="block py-2 text-slate-600">Certifications</a>
+            <a href="#contact" class="block py-2 text-slate-600">Contact</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <section id="about" class="container mx-auto px-6 py-16 md:py-24 section-fade-in">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">Hi, I’m Akash Chandra</h1>
+                <p class="mt-4 text-lg md:text-xl text-slate-600">RPA Developer | UiPath Specialist </p>
+                <div class="mt-8 max-w-2xl mx-auto">
+                    <p class="text-base md:text-lg text-slate-700 leading-relaxed">
+                        I design, develop, and deploy scalable UiPath automation solutions that streamline business processes, improve accuracy, and reduce manual effort.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="bg-white py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Technical Skills</h2>
+                    <p class="mt-2 text-lg text-slate-600">A showcase of my technical abilities and tools I work with.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4">RPA & Automation</h3>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>UiPath Studio</li><li>UiPath Orchestrator</li><li>UiPath Assistant</li><li>REFramework</li><li>Selectors</li><li>Exception Handling</li><li>Logging</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4">Automation Capabilities</h3>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>Web Automation</li><li>Excel Automation</li><li>File &amp; Folder Automation</li><li>Email Automation</li><li>OCR &amp; Document Processing</li>
+
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4">Orchestrator & Production</h3>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>Orchestrator Queues, Assets, Jobs, Schedules</li><li>Package Deployment, Monitoring, and Logs</li><li>UAT and Production Support</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4">Programming & Tools</h3>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>Python, C#, SQL, JavaScript</li><li>Git (Basic), Debugging, Workflow Analyzer</li><li>OOP & Control Flow Concepts</li><li>Basic API & JSON Handling</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" class="py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Professional Experience</h2>
+                    <p class="mt-2 text-lg text-slate-600">My professional journey and key accomplishments.</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="relative pl-8 sm:pl-10 py-6 before:absolute before:top-2 before:left-2 before:w-0.5 before:h-full before:bg-slate-200">
+                        <div class="relative">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full absolute top-2 -left-[38px] sm:-left-[46px] border-4 border-white"></div>
+                            <h3 class="text-xl font-semibold text-slate-800">RPA Developer</h3>
+                            <p class="text-md text-slate-600 font-medium">Caterpillar – Peoria, IL</p>
+                            <p class="text-sm text-slate-500">July 2025 – Present</p>
+                            <ul class="mt-4 list-disc list-inside space-y-2 text-slate-700">
+  <li>Developed enterprise-grade UiPath automations using REFramework and production best practices</li>
+  <li>Built attended and unattended bots for web, Excel, and reporting workflows</li>
+  <li>Automated secure web login, navigation, and structured data extraction</li>
+  <li>Implemented Excel processing using DataTables for validation and reporting</li>
+  <li>Used Orchestrator queues, assets, schedules, and logs for scalable execution</li>
+  <li>Added structured logging, exception handling, and retry mechanisms</li>
+  <li>Supported UAT and production by resolving defects and redeploying automations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                    <div class="relative pl-8 sm:pl-10 py-6 before:absolute before:top-2 before:left-2 before:w-0.5 before:h-full before:bg-slate-200">
+                        <div class="relative">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full absolute top-2 -left-[38px] sm:-left-[46px] border-4 border-white"></div>
+                            <h3 class="text-xl font-semibold text-slate-800">RPA Associate</h3>
+                            <p class="text-md text-slate-600 font-medium">Pet Valu – Fort Lauderdale, FL</p>
+                            <p class="text-sm text-slate-500">Jan 2022 – Dec 2023</p>
+                            <ul class="mt-4 list-disc list-inside space-y-2 text-slate-700">
+  <li>Developed UiPath automations for document and structured data processing</li>
+  <li>Implemented OCR-based extraction for scanned and PDF documents</li>
+  <li>Automated file and folder handling for input, output, and archiving</li>
+  <li>Built reusable workflows with validation, logging, and exception handling</li>
+  <li>Used queue-based transaction processing for independent document handling</li>
+  <li>Supported testing and UAT by refining workflows and fixing defects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects" class="bg-white py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Projects</h2>
+                    <p class="mt-2 text-lg text-slate-600">A selection of projects I've worked on.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-slate-50 rounded-lg shadow-sm overflow-hidden flex flex-col">
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">RPA Web Automation</h3>
+                            <p class="mt-2 text-slate-600">An enterprise-style UiPath automation project designed to securely log into a web application,
+            navigate predefined pages, extract structured data, and generate validated Excel reports.
+            The solution was built with a focus on stability, scalability, and production readiness.</p>
+                        </div>
+                        <div class="p-6 bg-slate-100">
+                             <button class="modal-open-button w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors" data-modal-id="project1-modal">View Details</button>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg shadow-sm overflow-hidden flex flex-col">
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">Virtual Mouse System</h3>
+                            <p class="mt-2 text-slate-600">A hands-free computer control system using Python, OpenCV, and MediaPipe that translates hand gestures into mouse actions.</p>
+                        </div>
+                        <div class="p-6 bg-slate-100">
+                            <button class="modal-open-button w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors" data-modal-id="project2-modal">View Details</button>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg shadow-sm overflow-hidden flex flex-col">
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800">Database Design for E-Commerce Grocery Application</h3>
+                            <p class="mt-2 text-slate-600">A project focused on developing the database backend for a web-based grocery delivery application connecting users with local supermarkets.</p>
+                        </div>
+                        <div class="p-6 bg-slate-100">
+                            <button class="modal-open-button w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors" data-modal-id="project3-modal">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Education</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold text-slate-800">Master of Science in Computer Science</h3>
+                        <p class="text-md text-slate-600 mt-1">University of Illinois Springfield</p>
+                        <p class="text-sm text-slate-500">Graduated: May 2025 | GPA: 4.0/4.0</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold text-slate-800">Bachelor of Technology in Computer Science</h3>
+                        <p class="text-md text-slate-600 mt-1">Nalla Narasimha Reddy Education Society's Group of Institutions</p>
+                        <p class="text-sm text-slate-500">Graduated: July 2023 | CGPA: 7.1/10</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="bg-white py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Certifications & Virtual Experience</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm text-center">
+                        <h3 class="text-xl font-semibold text-slate-800"> Oracle Cloud Infrastructure (OCI) 2025 Certified AI Foundation Associate certification</h3>
+                        <p class="text-md text-slate-600 mt-1">Oracle</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm text-center">
+                        <h3 class="text-xl font-semibold text-slate-800">AWS Academy Cloud Foundations</h3>
+                        <p class="text-md text-slate-600 mt-1">AWS Academy Graduate</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm text-center">
+                        <h3 class="text-xl font-semibold text-slate-800">Tech Consulting Virtual Job Simulation</h3>
+                        <p class="text-md text-slate-600 mt-1">Deloitte</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-sm text-center">
+                        <h3 class="text-xl font-semibold text-slate-800">Agile & Scrum Virtual Experience</h3>
+                        <p class="text-md text-slate-600 mt-1">Accenture</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="contact" class="bg-slate-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold">Get In Touch</h2>
+            <p class="mt-2 text-slate-300">Feel free to reach out for collaborations or just a friendly chat.</p>
+            <div class="mt-6 flex justify-center items-center space-x-6">
+                 <a href="mailto:akashdasi0502@gmail.com" class="hover:text-blue-400 transition-colors">akashdasi0502@gmail.com</a>
+                 <span>&bull;</span>
+                 <a href="www.linkedin.com/in/akash-dasi" class="hover:text-blue-400 transition-colors">LinkedIn</a>
+                 <span>&bull;</span>
+                 <p>(217) 220-0377</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal for Project 3 -->
+    <div id="project3-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-white rounded-lg shadow-xl max-w-2xl w-full p-8 transform -translate-y-10">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-slate-800">Database Design for E-Commerce Grocery Application</h3>
+                <button class="modal-close-button text-slate-500 hover:text-slate-800">&times;</button>
+            </div>
+            <p class="text-slate-600 mb-4">This project's goal was to develop a web-based grocery shopping application that connects users with nearby supermarkets for online ordering and delivery. The core objective was to support local businesses while providing a convenient and efficient shopping experience for customers.</p>
+            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                <li>Developed the database backend for the application.</li>
+                <li>Designed a detailed database schema that included tables for users, stores, products, orders, and delivery logistics to manage all application data.</li>
+                <li>Ensured data integrity by defining the relationships between tables and establishing data integrity constraints.</li>
+                <li>The database schema served as the foundational blueprint for the application's data management, storage, and backend development.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Modal for Project 2 -->
+    <div id="project2-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-white rounded-lg shadow-xl max-w-2xl w-full p-8 transform -translate-y-10">
+             <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-slate-800">Virtual Mouse System</h3>
+                <button class="modal-close-button text-slate-500 hover:text-slate-800">&times;</button>
+            </div>
+            <p class="text-slate-600 mb-4">A personal project to create a hands-free method of computer control. This system uses hand gestures captured through a webcam to perform standard mouse operations, offering an intuitive and seamless user interaction experience.</p>
+            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                <li>Developed using Python, with the OpenCV and MediaPipe libraries for advanced computer vision.</li>
+                <li>Implemented real-time hand tracking to simulate cursor movement, clicks, scrolling, and drag-and-drop actions.</li>
+                <li>Utilized the PyAutoGUI library to map gesture recognition data to system-level mouse events.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal for Project 1 -->
+<div id="project1-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
+    <div class="modal-content bg-white rounded-lg shadow-xl max-w-2xl w-full p-8 transform -translate-y-10">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-2xl font-bold text-slate-800">RPA Web Automation</h3>
+            <button class="modal-close-button text-slate-500 hover:text-slate-800">&times;</button>
+        </div>
+
+        <p class="text-slate-600 mb-4">
+            An enterprise-style UiPath automation project designed to securely log into a web application,
+            navigate predefined pages, extract structured data, and generate validated Excel reports.
+            The solution was built with a focus on stability, scalability, and production readiness.
+        </p>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-700">
+            <li>Automated secure web login and controlled navigation using reliable selectors and synchronization techniques</li>
+            <li>Extracted structured data and applied business rule validation using DataTables</li>
+            <li>Generated Excel-based reports with validated output</li>
+            <li>Implemented REFramework for structured initialization, transaction processing, and cleanup</li>
+            <li>Added robust exception handling, retry logic, and structured logging</li>
+            <li>Designed the automation following UiPath production best practices</li>
+        </ul>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-fade-in').forEach(section => {
+                fadeObserver.observe(section);
+            });
+
+            const modalOpenButtons = document.querySelectorAll('.modal-open-button');
+            const modalCloseButtons = document.querySelectorAll('.modal-close-button');
+            
+            modalOpenButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalId = button.dataset.modalId;
+                    const modal = document.getElementById(modalId);
+                    modal.classList.remove('hidden');
+                    setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                    setTimeout(() => modal.querySelector('.modal-content').classList.remove('-translate-y-10'), 10);
+                });
+            });
+
+            const closeModal = (modal) => {
+                modal.classList.add('opacity-0');
+                modal.querySelector('.modal-content').classList.add('-translate-y-10');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            modalCloseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal-overlay');
+                    closeModal(modal);
+                });
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        closeModal(overlay);
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(closeModal);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
